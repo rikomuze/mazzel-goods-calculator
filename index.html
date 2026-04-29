@@ -88,8 +88,16 @@
       align-items: start;
       padding: 14px 0;
       border-bottom: 1px solid rgba(255,255,255,0.06);
-      grid-template-columns: minmax(0, 1fr) 90px 1fr;
+    grid-template-columns: 76px minmax(0, 1fr) 90px 1fr;
     }
+    .item-image {
+  width: 76px;
+  height: 76px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.05);
+}
     .item:last-child { border-bottom: none; }
     .item-name-wrap { min-width: 0; }
     .item-head {
@@ -300,7 +308,7 @@
     }
     @media (max-width: 1100px) {
       .layout { grid-template-columns: 1fr; }
-      .item { grid-template-columns: minmax(0, 1fr) 90px; }
+   .item { grid-template-columns: 76px minmax(0, 1fr) 90px; }
       .member-box,
       .controls { grid-column: 1 / -1; }
       .controls { justify-content: flex-start; }
@@ -309,9 +317,14 @@
       .container { padding: 16px 12px 48px; }
       h1 { font-size: 24px; }
       .summary-value { font-size: 24px; }
-      .item { grid-template-columns: 1fr; gap: 10px; }
+     .item { grid-template-columns: 76px 1fr; gap: 10px; }
       .price { text-align: left; }
       .controls { justify-content: flex-start; }
+      .price,
+.controls,
+.member-box {
+  grid-column: 1 / -1;
+}
       .member-row { grid-template-columns: 1fr; }
     }
   </style>
@@ -550,6 +563,7 @@
       const count = quantities[item.id];
       return `
         <div class="item">
+        <img class="item-image" src="images/${item.id}.webp" alt="${item.name}">
           <div class="item-name-wrap">
             <div class="item-head">
             
