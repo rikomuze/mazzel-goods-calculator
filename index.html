@@ -352,16 +352,17 @@
         <div class="breakdown" id="breakdown"></div>
         <div class="warn" id="warningBox"></div>
 
-        <div class="actions">
-          <button id="copyBtn">結果をコピー</button>
-          <button id="resetBtn" class="secondary">リセット</button>
-        </div>
+       <div class="actions">
+  <button id="copyBtn">結果をコピー</button>
+  <button id="downloadBtn">画像で保存</button>
+  <button id="resetBtn" class="secondary">リセット</button>
+</div>
 
         <p class="memo">マルチストラップとアクスタは、メンバーごとに数量を選ぶ仕様です。全種ほしいを押すと、各メンバーが1点ずつ入ります。</p>
       </aside>
     </div>
   </div>
-
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
     const goods = [
        { id: 'stripe-shirt', name: '[Shall we hit the Banquet?] ストライプシャツ', price: 12000, limit: 3, note: '通常上限3点' },
@@ -410,6 +411,7 @@
     const breakdown = document.getElementById('breakdown');
     const warningBox = document.getElementById('warningBox');
     const copyBtn = document.getElementById('copyBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
     const resetBtn = document.getElementById('resetBtn');
 
     function formatYen(value) {
@@ -617,6 +619,28 @@
     });
 
     resetBtn.addEventListener('click', resetAll);
+    downloadBtn.addEventListener('click', async function () {
+  const target = document.querySelector('aside.panel');
+
+  try {
+    const canvas = await html2canvas(target, {
+      backgroundColor: '#1a111b',
+      scale: 2
+    });
+
+    const link = document.createElement('a');
+    link.download = 'mazzel-goods-result.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+
+    downloadBtn.textContent = '保存しました';
+    setTimeout(function () {
+      downloadBtn.textContent = '画像で保存';
+    }, 1600);
+  } catch (e) {
+    alert('画像保存に失敗しました。');
+  }
+});
 
     window.changeCount = changeCount;
     window.inputCount = inputCount;
