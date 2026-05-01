@@ -325,7 +325,19 @@
 .member-box {
   grid-column: 1 / -1;
 }
-      .member-row { grid-template-columns: 1fr; }
+.member-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.member-row {
+  grid-template-columns: 1fr;
+  padding: 10px;
+}
+
+.member-controls {
+  justify-content: flex-start;
+}
     }
   </style>
 </head>
