@@ -75,6 +75,56 @@
   .sticker span{color:#e27a94}
   .site-head .here{font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--faded)}
 
+  .tool-nav{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:6px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    max-width:760px;
+    padding:6px 2px 10px;
+  }
+  .tool-nav::-webkit-scrollbar{display:none}
+  .tool-nav a{
+    flex:0 0 auto;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:38px;
+    padding:8px 12px;
+    background:rgba(255,255,255,.55);
+    border:1px solid rgba(64,56,47,.16);
+    box-shadow:0 4px 12px rgba(64,56,47,.08);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.04em;
+    color:var(--faded);
+    transform:rotate(.2deg);
+  }
+  .tool-nav a:nth-child(2n){transform:rotate(-.4deg)}
+  .tool-nav a.active{
+    color:var(--pencil);
+    background:var(--paper);
+    position:relative;
+  }
+  .tool-nav a.active::before{
+    content:"";
+    position:absolute;
+    width:32px;
+    height:8px;
+    background:var(--tape-mint);
+    top:-5px;
+    left:50%;
+    transform:translateX(-50%) rotate(-3deg);
+  }
+  @media(max-width:760px){
+    .site-head{display:block}
+    .site-head .sticker{margin-bottom:10px}
+    .tool-nav{justify-content:flex-start;max-width:100%;padding-bottom:6px}
+  }
+
   /* ---------- 見出し ---------- */
   .intro{padding:16px 2px 14px}
   .intro h1{
@@ -460,7 +510,15 @@
     <a class="sticker" href="https://rikomuze.github.io/muze-tool-box/">
       <b>Muze Tool Box</b> <span>♡</span>
     </a>
-    <span class="here">グッズ計算機 EC</span>
+    <nav class="tool-nav" aria-label="MUZE TOOL BOX 共通ナビ">
+      <a href="https://rikomuze.github.io/muze-tool-box/">TOP</a>
+      <a href="https://rikomuze.github.io/oshi-visual-6/">推しビジュ6選</a>
+      <a href="https://rikomuze.github.io/mazzel-best-visual/">最強9マス</a>
+      <a href="https://rikomuze.github.io/mazzel-goods-calculator/" class="active">グッズ計算機</a>
+      <!-- URL未確定の場合は、ここを公開URLに差し替えてください -->
+      <a href="https://rikomuze.github.io/otaku-numa-shindan/">オタク沼診断</a>
+      <a href="https://abaft-conga-f54.notion.site/fanmeating?pvs=74">チケット解説</a>
+    </nav>
   </header>
 
   <section class="intro">
@@ -523,7 +581,7 @@
 
   <footer class="memo-card">
     MAZZELが好きで、推し活に「あったら便利かも」と思ったものを作っています。紹介やシェアは許可なくどうぞ。
-    <small>MAZZEL・BMSG公式とは関係のない非公式ファンメイドサイトです。掲載価格は変更されている場合があります。</small>
+    <small>MAZZEL・BMSG公式とは関係のない非公式ファンメイドサイトです。掲載価格・在庫は変更されている場合があります。</small>
   </footer>
 </div>
 
@@ -550,47 +608,19 @@
 
 /* ---------- 商品データ(現行と同一) ---------- */
 var goods = [
-  { id: 'full-course-stand-charm', name: '[Shall we hit the Banquet?] フルコーススタンドチャーム BMSG SHOP', price: 1300, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
-  { id: 'banquet-thanks-acrylic-stand', name: '[ツアー衣装] アクリルスタンド', price: 1300, limit: 3, note: '各メンバー3点まで / 全8種', members: ['KAIRYU', 'NAOYA', 'RAN', 'SEITO', 'RYUKI', 'TAKUTO', 'HAYATO', 'EIKI'], categories: ['Banquet', 'メンバー別'] },
-  { id: 'get-up-and-dance-pouch', name: '[Get Up And Dance] ポーチ', price: 3000, limit: 3, note: '各メンバー3点まで / 全8種', members: ['KAIRYU', 'NAOYA', 'RAN', 'SEITO', 'RYUKI', 'TAKUTO', 'HAYATO', 'EIKI'], categories: ['その他', 'メンバー別'] },
-  { id: 'so-strawberry-flake-sticker', name: '[So Strawberry] フレークシールセット', price: 1800, limit: 3, note: '通常上限3点', categories: ['その他'] },
-  { id: 'stripe-shirt', name: '[Shall we hit the Banquet?] ストライプシャツ', price: 12000, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
-  { id: 'tie-necklace-purple', name: '[Shall we hit the Banquet?] ネクタイネックレス PURPLE', price: 3500, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
-  { id: 'tie-necklace-black', name: '[Shall we hit the Banquet?] ネクタイネックレス BLACK', price: 3800, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
-  { id: 'nano-bag', name: '[Shall we hit the Banquet?] ナノバッグ', price: 6200, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
-  { id: 'squeeze-charm', name: '[Shall we hit the Banquet?] スクイーズチャーム', price: 1800, limit: 3, note: '各メンバー3点まで / 全9種', members: ['KAIRYU', 'NAOYA', 'RAN', 'SEITO', 'RYUKI', 'TAKUTO', 'HAYATO', 'EIKI', 'MAZZEL'], categories: ['Banquet', 'メンバー別'] },
-  { id: 'custom-band-pu', name: 'MAZZEL OFFICIAL LIGHT CUSTOM BAND (PU)', price: 2000, limit: 3, note: '通常上限3点', categories: ['ライト関連'] },
+  { id: 'custom-band-pu', image: 'custom-band', name: 'MAZZEL OFFICIAL LIGHT CUSTOM BAND (PU)', price: 2000, limit: 3, note: '通常上限3点', categories: ['ライト関連'] },
   { id: 'rubber-band', name: '[Shall we hit the Banquet?] ラバーバンド', price: 1000, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
   { id: 'tshirt-black', name: '[Shall we hit the Banquet?] Tシャツ BLACK', price: 5000, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
   { id: 'big-tote', name: '[Shall we hit the Banquet?] BIGトートバッグ', price: 5800, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
   { id: 'multi-strap', name: '[Shall we hit the Banquet?] マルチストラップ', price: 2500, limit: 3, note: '各メンバー3点まで / 全4種', members: ['NAOYA', 'RAN', 'HAYATO', 'MAZZEL'], categories: ['Banquet', 'メンバー別'] },
-  { id: 'photocard-case', name: '[Shall we hit the Banquet?] フォトカードケース', price: 2000, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
-  { id: 'clear-custom-sticker', name: '[Shall we hit the Banquet?] クリアカスタムシール', price: 600, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
   { id: 'acrylic-trolley', name: '[Shall we hit the Banquet?] アクスタトロッコ', price: 3600, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
-  { id: 'banquet-bang-acrylic-stand', name: '[BANQUET BANG] アクリルスタンド', price: 1300, limit: 3, note: '各メンバー3点まで / 全8種', members: ['KAIRYU', 'NAOYA', 'RAN', 'SEITO', 'RYUKI', 'TAKUTO', 'HAYATO', 'EIKI'], categories: ['BANQUET BANG', 'メンバー別'] },
-  { id: 'banquet-bang-big-acrylic-stand', name: '[BANQUET BANG] でっかアクリルスタンド MAZZEL', price: 4000, limit: 3, note: '通常上限3点', categories: ['BANQUET BANG'] },
-  { id: 'banquet-bang-random-art-charm', name: '[BANQUET BANG] ランダムアートチャーム', price: 700, limit: 10, note: 'ランダム / 上限10点', categories: ['BANQUET BANG', 'ランダム'] },
-  { id: 'scrunchie-lips', name: '[Shall we hit the Banquet?] くちびるとシュシュ', price: 2500, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
+  { id: 'banquet-bang-acrylic-stand', image: 'acrylic-stand', name: '[BANQUET BANG] アクリルスタンド', price: 1300, limit: 3, note: '各メンバー3点まで / 全8種', members: ['KAIRYU', 'NAOYA', 'RAN', 'SEITO', 'RYUKI', 'TAKUTO', 'HAYATO', 'EIKI'], categories: ['BANQUET BANG', 'メンバー別'] },
+  { id: 'banquet-bang-big-acrylic-stand', image: 'big-acrylic-stand', name: '[BANQUET BANG] でっかアクリルスタンド MAZZEL', price: 4000, limit: 3, note: '通常上限3点', categories: ['BANQUET BANG'] },
   { id: 'candle', name: '[Shall we hit the Banquet?] ふつうのきゃんどる', price: 5000, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
-  { id: 'fight-mirror', name: '[Shall we hit the Banquet?] Fight Mirror', price: 1500, limit: 5, note: '通常上限5点', categories: ['Banquet'] },
-  { id: 'coaster', name: '[Shall we hit the Banquet?] まぜたくコースター', price: 3500, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
-  { id: 'tomcorn-charm', name: '[Shall we hit the Banquet?] TOMCORNぬいぐるみチャーム', price: 2500, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
-  { id: 'einyanko-charm', name: '[Shall we hit the Banquet?] えいにゃんこチャーム', price: 2500, limit: 3, note: '通常上限3点', categories: ['Banquet'] },
-  { id: 'clear-card-set-2026', name: 'MAZZEL クリアカードセット 2026', price: 3300, limit: 3, note: '16枚入り / 通常上限3点', categories: ['SPRING2026'] },
-  { id: 'spring2026-sign-book', name: 'MAZZEL SPRING2026 サインブック', price: 2000, limit: 3, note: '通常上限3点', categories: ['SPRING2026'] },
-  { id: 'spring2026-embroidered-charm', name: 'MAZZEL SPRING2026 刺繍チャーム', price: 1200, limit: 3, note: '各メンバー3点まで / 全9種', members: ['KAIRYU', 'NAOYA', 'RAN', 'SEITO', 'RYUKI', 'TAKUTO', 'HAYATO', 'EIKI', 'MAZZEL'], categories: ['SPRING2026', 'メンバー別'] },
-  { id: 'only-you-towel', name: 'MAZZEL "Only You" タオル', price: 2500, limit: 3, note: '通常上限3点', categories: ['Only You'] },
-  { id: 'only-you-sweat-short', name: 'MAZZEL "Only You" スウェット Short', price: 6200, limit: 3, note: '通常上限3点', categories: ['Only You'] },
-  { id: 'only-you-sweat-over', name: 'MAZZEL "Only You" スウェット Over', price: 6800, limit: 3, note: '通常上限3点', categories: ['Only You'] },
-  { id: 'only-you-cursive-brooch', name: 'MAZZEL "Only You" カーシヴブローチ', price: 1000, limit: 3, note: '各メンバー3点まで / 全9種', members: ['KAIRYU', 'NAOYA', 'RAN', 'SEITO', 'RYUKI', 'TAKUTO', 'HAYATO', 'EIKI', 'MAZZEL'], categories: ['Only You', 'メンバー別'] },
-  { id: 'only-you-jacket-charm', name: 'MAZZEL "Only You" ジャケットチャーム', price: 800, limit: 3, note: '通常上限3点', categories: ['Only You'] },
-  { id: 'only-you-random-illumination-charm', name: 'MAZZEL "Only You" ランダムイルミチャーム', price: 800, limit: 10, note: 'ランダム / 上限10点', categories: ['Only You', 'ランダム'] },
-  { id: 'only-you-fur-beanie', name: 'MAZZEL "Only You" ファービーニー', price: 3500, limit: 3, note: '通常上限3点', categories: ['Only You'] },
-  { id: 'only-you-big-stole', name: 'MAZZEL "Only You" ビッグストール', price: 4000, limit: 3, note: '通常上限3点', categories: ['Only You'] },
-  { id: 'only-you-organdy-bag', name: 'MAZZEL "Only You" オーガンジーバッグ', price: 4800, limit: 3, note: '通常上限3点', categories: ['Only You'] }
+  { id: 'coaster', name: '[Shall we hit the Banquet?] まぜたくコースター', price: 3500, limit: 3, note: '通常上限3点', categories: ['Banquet'] }
 ];
 
-var categories = ['すべて', 'Banquet', 'BANQUET BANG', 'SPRING2026', 'Only You', 'ライト関連', 'メンバー別', 'ランダム', 'その他'];
+var categories = ['すべて', 'Banquet', 'BANQUET BANG', 'ライト関連', 'メンバー別'];
 var currentCategory = 'すべて';
 
 var quantities = {};
@@ -666,7 +696,7 @@ function getWarnings() {
 }
 
 /* ---------- 描画 ---------- */
-function imageSrc(id) { return 'images/' + id + '.webp'; }
+function imageSrc(item) { return 'images/' + (item.image || item.id) + '.webp'; }
 
 function renderCategoryTabs() {
   categoryTabs.innerHTML = categories.map(function (category) {
@@ -709,7 +739,7 @@ function renderRow(item) {
   var count = quantities[item.id];
   var atLimit = !item.members && count >= item.limit;
   return '<div class="item">' +
-    '<img class="item-image" src="' + imageSrc(item.id) + '" data-fallback="' + item.id + '" alt="' + escapeHtml(item.name) + '" loading="lazy">' +
+    '<img class="item-image" src="' + imageSrc(item) + '" data-fallback="' + (item.image || item.id) + '" alt="' + escapeHtml(item.name) + '" loading="lazy">' +
     '<div class="item-name-wrap">' +
       '<div class="item-head">' +
         '<div class="name">' + escapeHtml(item.name) + '</div>' +
